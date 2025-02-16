@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar_menu">
+            <li class="navbar_item"><a href="/">Home</a></li>
+            {% if name %}
+            <li class="navbar_item"><a href="/logout">Logout</a></li>
+            {% else %}
+            <li class="navbar_item">Login</li>
+            {% endif %}
+            <li class="navbar_item">Expenses</li>
+            <li class="navbar_item_burger">burger</li>
+            {% if name %}
+                <h1 class="username_logged" style="font-weight: 400;">Welcome {{name}}</h1>
+            {% endif %}
+        </ul>
+        <ul id="mobile_navmenu">
+            <li class="navbar_item_mobile">Home</li>
+            <li class="navbar_item_mobile">Login</li>
+            <li class="navbar_item_mobile">Expenses</li>
+        </ul>
+    </nav>
+    {% block content %}
+        
+    {% endblock %}
+    <script>
+        const burgeropen = document.getElementsByClassName('navbar_item_burger')
+        let isVisible = true;
+        for(let i = 0; i < burgeropen.length; i++) {
+            
+            burgeropen[i].addEventListener('click', (e) => {
+                mobilemenu = document.getElementById("mobile_navmenu")
+
+                
+                isVisible ? (mobilemenu.style.left = '0px', isVisible = false) : (mobilemenu.style.left = '-999px', isVisible=true);
+                console.log(isVisible)
+            })
+        }
+    </script>
+</body>
+</html>
